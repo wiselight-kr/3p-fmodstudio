@@ -93,20 +93,22 @@ mkdir -p "$stage_debug"
 mkdir -p "$stage_release"
 
 echo "${FMOD_VERSION_PRETTY}" > "${stage}/VERSION.txt"
-
+COPYFLAGS=""
 pushd "$FMOD_SOURCE_DIR"
     case "$AUTOBUILD_PLATFORM" in
         "windows")
-            cp -dR --preserve=mode,timestamps "api/lowlevel/lib/fmodL_vc.lib" "$stage_debug"
-            cp -dR --preserve=mode,timestamps "api/lowlevel/lib/fmod_vc.lib" "$stage_release"
-            cp -dR --preserve=mode,timestamps "api/lowlevel/lib/fmodL.dll" "$stage_debug"
-            cp -dR --preserve=mode,timestamps "api/lowlevel/lib/fmod.dll" "$stage_release"
+	    COPYFLAGS="-dR --preserve=mode,timestamps"
+            cp $COPYFLAGS "api/lowlevel/lib/fmodL_vc.lib" "$stage_debug"
+            cp $COPYFLAGS "api/lowlevel/lib/fmod_vc.lib" "$stage_release"
+            cp $COPYFLAGS "api/lowlevel/lib/fmodL.dll" "$stage_debug"
+            cp $COPYFLAGS "api/lowlevel/lib/fmod.dll" "$stage_release"
         ;;
         "windows64")
-            cp -dR --preserve=mode,timestamps "api/lowlevel/lib/fmodL64_vc.lib" "$stage_debug"
-            cp -dR --preserve=mode,timestamps "api/lowlevel/lib/fmod64_vc.lib" "$stage_release"
-            cp -dR --preserve=mode,timestamps "api/lowlevel/lib/fmodL64.dll" "$stage_debug"
-            cp -dR --preserve=mode,timestamps "api/lowlevel/lib/fmod64.dll" "$stage_release"
+	    COPYFLAGS="-dR --preserve=mode,timestamps"
+            cp $COPYFLAGS "api/lowlevel/lib/fmodL64_vc.lib" "$stage_debug"
+            cp $COPYFLAGS "api/lowlevel/lib/fmod64_vc.lib" "$stage_release"
+            cp $COPYFLAGS "api/lowlevel/lib/fmodL64.dll" "$stage_debug"
+            cp $COPYFLAGS "api/lowlevel/lib/fmod64.dll" "$stage_release"
         ;;
         "darwin")
             cp "api/lowlevel/lib/libfmodL.dylib" "$stage_debug"
@@ -131,8 +133,8 @@ pushd "$FMOD_SOURCE_DIR"
     esac
 
     # Copy the headers
-    cp -dR --preserve=mode,timestamps api/lowlevel/inc/*.h "$stage/include/fmodstudio"
-    cp -dR --preserve=mode,timestamps api/lowlevel/inc/*.hpp "$stage/include/fmodstudio"
+    cp $COPYFLAGS api/lowlevel/inc/*.h "$stage/include/fmodstudio"
+    cp $COPYFLAGS api/lowlevel/inc/*.hpp "$stage/include/fmodstudio"
 
     # Copy License (extracted from the readme)
     cp "doc/LICENSE.TXT" "$stage/LICENSES/fmodstudio.txt"
