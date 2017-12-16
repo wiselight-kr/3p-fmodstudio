@@ -1,8 +1,8 @@
 #!/bin/bash
 
 FMOD_ROOT_NAME="fmodstudioapi"
-FMOD_VERSION="11000"
-FMOD_VERSION_PRETTY="1.10.00"
+FMOD_VERSION="11002"
+FMOD_VERSION_PRETTY="1.10.02"
 
 cd "$(dirname "$0")"
 
@@ -102,9 +102,9 @@ pushd "$FMOD_SOURCE_DIR"
             cp $COPYFLAGS "api/lowlevel/lib/fmod_vc.lib" "$stage_release"
             cp $COPYFLAGS "api/lowlevel/lib/fmodL.dll" "$stage_debug"
             cp $COPYFLAGS "api/lowlevel/lib/fmod.dll" "$stage_release"
-        ;;
-        "windows64")
-	    COPYFLAGS="-dR --preserve=mode,timestamps"
+        #;;
+        #"windows64")
+	    #COPYFLAGS="-dR --preserve=mode,timestamps"
             cp $COPYFLAGS "api/lowlevel/lib/fmodL64_vc.lib" "$stage_debug"
             cp $COPYFLAGS "api/lowlevel/lib/fmod64_vc.lib" "$stage_release"
             cp $COPYFLAGS "api/lowlevel/lib/fmodL64.dll" "$stage_debug"
@@ -139,5 +139,5 @@ pushd "$FMOD_SOURCE_DIR"
     # Copy License (extracted from the readme)
     cp "doc/LICENSE.TXT" "$stage/LICENSES/fmodstudio.txt"
 popd
-pass
+#pass
 
