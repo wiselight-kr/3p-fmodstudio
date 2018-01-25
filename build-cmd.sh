@@ -96,20 +96,19 @@ echo "${FMOD_VERSION_PRETTY}" > "${stage}/VERSION.txt"
 COPYFLAGS=""
 pushd "$FMOD_SOURCE_DIR"
     case "$AUTOBUILD_PLATFORM" in
-        "windows")
-	    COPYFLAGS="-dR --preserve=mode,timestamps"
+        windows*)
+        COPYFLAGS="-dR --preserve=mode,timestamps"
             cp $COPYFLAGS "api/lowlevel/lib/fmodL_vc.lib" "$stage_debug"
             cp $COPYFLAGS "api/lowlevel/lib/fmod_vc.lib" "$stage_release"
             cp $COPYFLAGS "api/lowlevel/lib/fmodL.dll" "$stage_debug"
             cp $COPYFLAGS "api/lowlevel/lib/fmod.dll" "$stage_release"
-        #;;
-        #"windows64")
-	    #COPYFLAGS="-dR --preserve=mode,timestamps"
+
             cp $COPYFLAGS "api/lowlevel/lib/fmodL64_vc.lib" "$stage_debug"
             cp $COPYFLAGS "api/lowlevel/lib/fmod64_vc.lib" "$stage_release"
             cp $COPYFLAGS "api/lowlevel/lib/fmodL64.dll" "$stage_debug"
             cp $COPYFLAGS "api/lowlevel/lib/fmod64.dll" "$stage_release"
         ;;
+
         "darwin")
             cp "api/lowlevel/lib/libfmodL.dylib" "$stage_debug"
             cp "api/lowlevel/lib/libfmod.dylib" "$stage_release"
@@ -120,11 +119,13 @@ pushd "$FMOD_SOURCE_DIR"
               fix_dylib_id libfmod.dylib
             popd
         ;;
+
         "linux")
             # Copy the relevant stuff around
             cp -a api/lowlevel/lib/x86/libfmodL.so* "$stage_debug"
             cp -a api/lowlevel/lib/x86/libfmod.so* "$stage_release"
          ;;
+
         "linux64")
             # Copy the relevant stuff around
             cp -a api/lowlevel/lib/x86_64/libfmodL.so* "$stage_debug"
