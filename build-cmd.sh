@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 FMOD_ROOT_NAME="fmodstudioapi"
 FMOD_VERSION="11002"
@@ -7,13 +7,15 @@ FMOD_VERSION_PRETTY="1.10.02"
 cd "$(dirname "$0")"
 
 # turn on verbose debugging output for parabuild logs.
-set -x
+exec 4>&1; export BASH_XTRACEFD=4; set -x
 # make errors fatal
 set -e
+# complain about unset env variables
+set -u
 
 # Check autobuild is around or fail
 if [ -z "$AUTOBUILD" ] ; then
-    fail
+    exit 1
 fi
 
 if [ "$OSTYPE" = "cygwin" ] ; then
@@ -140,5 +142,4 @@ pushd "$FMOD_SOURCE_DIR"
     # Copy License (extracted from the readme)
     cp "doc/LICENSE.TXT" "$stage/LICENSES/fmodstudio.txt"
 popd
-#pass
 
