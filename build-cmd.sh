@@ -111,7 +111,7 @@ pushd "$FMOD_SOURCE_DIR"
             cp $COPYFLAGS "api/lowlevel/lib/fmod64.dll" "$stage_release"
         ;;
 
-        "darwin")
+        darwin*)
             cp "api/lowlevel/lib/libfmodL.dylib" "$stage_debug"
             cp "api/lowlevel/lib/libfmod.dylib" "$stage_release"
             pushd "$stage_debug"
