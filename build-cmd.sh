@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 FMOD_ROOT_NAME="fmodstudioapi"
-FMOD_VERSION="11003"
-FMOD_VERSION_PRETTY="1.10.03"
+FMOD_VERSION="11004"
+FMOD_VERSION_PRETTY="1.10.04"
 
 cd "$(dirname "$0")"
 
@@ -98,13 +98,16 @@ echo "${FMOD_VERSION_PRETTY}" > "${stage}/VERSION.txt"
 COPYFLAGS=""
 pushd "$FMOD_SOURCE_DIR"
     case "$AUTOBUILD_PLATFORM" in
-        windows*)
+        "windows")
         COPYFLAGS="-dR --preserve=mode,timestamps"
             cp $COPYFLAGS "api/lowlevel/lib/fmodL_vc.lib" "$stage_debug"
             cp $COPYFLAGS "api/lowlevel/lib/fmod_vc.lib" "$stage_release"
             cp $COPYFLAGS "api/lowlevel/lib/fmodL.dll" "$stage_debug"
             cp $COPYFLAGS "api/lowlevel/lib/fmod.dll" "$stage_release"
+        ;;
 
+        "windows64")
+        COPYFLAGS="-dR --preserve=mode,timestamps"
             cp $COPYFLAGS "api/lowlevel/lib/fmodL64_vc.lib" "$stage_debug"
             cp $COPYFLAGS "api/lowlevel/lib/fmod64_vc.lib" "$stage_release"
             cp $COPYFLAGS "api/lowlevel/lib/fmodL64.dll" "$stage_debug"
