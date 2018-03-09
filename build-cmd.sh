@@ -66,7 +66,7 @@ case "$FMOD_ARCHIVE" in
         cmd.exe /c "$FMOD_ARCHIVE /S /D=$win_install_dir"
         if [ ! -d "$win_install_dir" ]; then
             echo "Please run $FMODEX_ARCHIVE as administrator and install to  $win_install_dir"
-            fail
+            exit 1
         fi
     ;;
     *.tar.gz)
