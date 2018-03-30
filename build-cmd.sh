@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+FMOD_DOWNLOAD_BASE="http://192.168.1.115/dev/pkg/"
 FMOD_ROOT_NAME="fmodstudioapi"
 FMOD_VERSION="11004"
 FMOD_VERSION_PRETTY="1.10.04"
@@ -46,6 +47,11 @@ esac
 FMOD_SOURCE_DIR="$FMOD_ROOT_NAME$FMOD_VERSION$FMOD_PLATFORM"
 FMOD_ARCHIVE="$FMOD_SOURCE_DIR$FMOD_FILEEXTENSION"
 
+if [ ! -f "$FMOD_ARCHIVE" ]
+then
+	curl -O "$FMOD_DOWNLOAD_BASE$FMOD_ARCHIVE"
+fi
+
 case "$FMOD_ARCHIVE" in
     *.exe)
         # We can't run the NSIS installer as admin in TC
@@ -70,7 +76,7 @@ case "$FMOD_ARCHIVE" in
         fi
     ;;
     *.tar.gz)
-        extract "$FMOD_ARCHIVE"
+        tar xvf "$FMOD_ARCHIVE"
     ;;
     *.dmg)
         hdid "$FMOD_ARCHIVE"
