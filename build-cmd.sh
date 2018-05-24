@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+FMOD_DOWNLOAD_BASE="http://192.168.1.115/dev/pkg/"
 FMOD_ROOT_NAME="fmodstudioapi"
 FMOD_VERSION="11005"
 FMOD_VERSION_PRETTY="1.10.05"
@@ -46,6 +47,11 @@ esac
 FMOD_SOURCE_DIR="$FMOD_ROOT_NAME$FMOD_VERSION$FMOD_PLATFORM"
 FMOD_ARCHIVE="$FMOD_SOURCE_DIR$FMOD_FILEEXTENSION"
 
+if [ ! -f "$FMOD_ARCHIVE" ]
+then
+	curl -O "$FMOD_DOWNLOAD_BASE$FMOD_ARCHIVE"
+fi
+
 case "$FMOD_ARCHIVE" in
     *.exe)
         # We can't run the NSIS installer as admin in TC
@@ -70,7 +76,7 @@ case "$FMOD_ARCHIVE" in
         fi
     ;;
     *.tar.gz)
-        extract "$FMOD_ARCHIVE"
+        tar xvf "$FMOD_ARCHIVE"
     ;;
     *.dmg)
         hdid "$FMOD_ARCHIVE"
@@ -115,7 +121,6 @@ pushd "$FMOD_SOURCE_DIR"
         ;;
 
         darwin*)
-            cp "api/lowlevel/lib/libfmodL.dylib" "$stage_debug"
             cp "api/lowlevel/lib/libfmod.dylib" "$stage_release"
             pushd "$stage_debug"
               fix_dylib_id libfmodL.dylib
@@ -127,13 +132,11 @@ pushd "$FMOD_SOURCE_DIR"
 
         "linux")
             # Copy the relevant stuff around
-            cp -a api/lowlevel/lib/x86/libfmodL.so* "$stage_debug"
             cp -a api/lowlevel/lib/x86/libfmod.so* "$stage_release"
          ;;
 
         "linux64")
             # Copy the relevant stuff around
-            cp -a api/lowlevel/lib/x86_64/libfmodL.so* "$stage_debug"
             cp -a api/lowlevel/lib/x86_64/libfmod.so* "$stage_release"
         ;;
     esac

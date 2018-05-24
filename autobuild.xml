@@ -60,7 +60,6 @@
           </map>
           <key>manifest</key>
           <array>
-            <string>lib/debug/libfmodL.dylib</string>
             <string>lib/release/libfmod.dylib</string>
           </array>
           <key>name</key>
@@ -82,7 +81,6 @@
           </map>
           <key>manifest</key>
           <array>
-            <string>lib/debug/*.so*</string>
             <string>lib/release/*.so*</string>
           </array>
           <key>name</key>
@@ -104,7 +102,6 @@
           </map>
           <key>manifest</key>
           <array>
-            <string>lib/debug/*.so*</string>
             <string>lib/release/*.so*</string>
           </array>
           <key>name</key>
