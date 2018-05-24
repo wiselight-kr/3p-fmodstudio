@@ -2,8 +2,8 @@
 
 FMOD_DOWNLOAD_BASE="http://192.168.1.115/dev/pkg/"
 FMOD_ROOT_NAME="fmodstudioapi"
-FMOD_VERSION="11004"
-FMOD_VERSION_PRETTY="1.10.04"
+FMOD_VERSION="11005"
+FMOD_VERSION_PRETTY="1.10.05"
 
 cd "$(dirname "$0")"
 
@@ -121,7 +121,6 @@ pushd "$FMOD_SOURCE_DIR"
         ;;
 
         darwin*)
-            cp "api/lowlevel/lib/libfmodL.dylib" "$stage_debug"
             cp "api/lowlevel/lib/libfmod.dylib" "$stage_release"
             pushd "$stage_debug"
               fix_dylib_id libfmodL.dylib
@@ -133,13 +132,11 @@ pushd "$FMOD_SOURCE_DIR"
 
         "linux")
             # Copy the relevant stuff around
-            cp -a api/lowlevel/lib/x86/libfmodL.so* "$stage_debug"
             cp -a api/lowlevel/lib/x86/libfmod.so* "$stage_release"
          ;;
 
         "linux64")
             # Copy the relevant stuff around
-            cp -a api/lowlevel/lib/x86_64/libfmodL.so* "$stage_debug"
             cp -a api/lowlevel/lib/x86_64/libfmod.so* "$stage_release"
         ;;
     esac
