@@ -2,8 +2,8 @@
 
 FMOD_DOWNLOAD_BASE="http://192.168.1.115/dev/pkg/"
 FMOD_ROOT_NAME="fmodstudioapi"
-FMOD_VERSION="11012"
-FMOD_VERSION_PRETTY="1.10.12"
+FMOD_VERSION="11013"
+FMOD_VERSION_PRETTY="1.10.13"
 
 cd "$(dirname "$0")"
 
@@ -71,7 +71,7 @@ case "$FMOD_ARCHIVE" in
         chmod +x "$FMOD_ARCHIVE"
         cmd.exe /c "$FMOD_ARCHIVE /S /D=$win_install_dir"
         if [ ! -d "$win_install_dir" ]; then
-            echo "Please run $FMODEX_ARCHIVE as administrator and install to  $win_install_dir"
+            echo "Please run $FMOD_ARCHIVE as administrator and install to  $win_install_dir"
             exit 1
         fi
     ;;
