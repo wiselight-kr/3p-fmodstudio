@@ -2,7 +2,7 @@
 
 FMOD_DOWNLOAD_BASE="http://192.168.1.115/dev/pkg/"
 FMOD_ROOT_NAME="fmodstudioapi"
-FMOD_VERSION="11012"
+FMOD_VERSION="11013"
 FMOD_VERSION_PRETTY="1.10.13"
 
 cd "$(dirname "$0")"
