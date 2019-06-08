@@ -2,8 +2,8 @@
 
 FMOD_DOWNLOAD_BASE="http://192.168.1.115/dev/pkg/"
 FMOD_ROOT_NAME="fmodstudioapi"
-FMOD_VERSION="11013"
-FMOD_VERSION_PRETTY="1.10.13"
+FMOD_VERSION="20001"
+FMOD_VERSION_PRETTY="2.00.01"
 
 cd "$(dirname "$0")"
 
@@ -106,22 +106,22 @@ pushd "$FMOD_SOURCE_DIR"
     case "$AUTOBUILD_PLATFORM" in
         "windows")
         COPYFLAGS="-dR --preserve=mode,timestamps"
-            cp $COPYFLAGS "api/lowlevel/lib/fmodL_vc.lib" "$stage_debug"
-            cp $COPYFLAGS "api/lowlevel/lib/fmod_vc.lib" "$stage_release"
-            cp $COPYFLAGS "api/lowlevel/lib/fmodL.dll" "$stage_debug"
-            cp $COPYFLAGS "api/lowlevel/lib/fmod.dll" "$stage_release"
+            cp $COPYFLAGS "api/core/lib/x86/fmodL_vc.lib" "$stage_debug"
+            cp $COPYFLAGS "api/core/lib/x86/fmod_vc.lib" "$stage_release"
+            cp $COPYFLAGS "api/core/lib/x86/fmodL.dll" "$stage_debug"
+            cp $COPYFLAGS "api/core/lib/x86/fmod.dll" "$stage_release"
         ;;
 
         "windows64")
         COPYFLAGS="-dR --preserve=mode,timestamps"
-            cp $COPYFLAGS "api/lowlevel/lib/fmodL64_vc.lib" "$stage_debug"
-            cp $COPYFLAGS "api/lowlevel/lib/fmod64_vc.lib" "$stage_release"
-            cp $COPYFLAGS "api/lowlevel/lib/fmodL64.dll" "$stage_debug"
-            cp $COPYFLAGS "api/lowlevel/lib/fmod64.dll" "$stage_release"
+            cp $COPYFLAGS "api/core/lib/x64/fmodL_vc.lib" "$stage_debug"
+            cp $COPYFLAGS "api/core/lib/x64/fmod_vc.lib" "$stage_release"
+            cp $COPYFLAGS "api/core/lib/x64/fmodL.dll" "$stage_debug"
+            cp $COPYFLAGS "api/core/lib/x64/fmod.dll" "$stage_release"
         ;;
 
         darwin*)
-            cp "api/lowlevel/lib/libfmod.dylib" "$stage_release"
+            cp "api/core/lib/libfmod.dylib" "$stage_release"
             pushd "$stage_debug"
               fix_dylib_id libfmodL.dylib
             popd
@@ -132,18 +132,18 @@ pushd "$FMOD_SOURCE_DIR"
 
         "linux")
             # Copy the relevant stuff around
-            cp -a api/lowlevel/lib/x86/libfmod.so* "$stage_release"
+            cp -a api/core/lib/x86/libfmod.so* "$stage_release"
          ;;
 
         "linux64")
             # Copy the relevant stuff around
-            cp -a api/lowlevel/lib/x86_64/libfmod.so* "$stage_release"
+            cp -a api/core/lib/x86_64/libfmod.so* "$stage_release"
         ;;
     esac
 
     # Copy the headers
-    cp $COPYFLAGS api/lowlevel/inc/*.h "$stage/include/fmodstudio"
-    cp $COPYFLAGS api/lowlevel/inc/*.hpp "$stage/include/fmodstudio"
+    cp $COPYFLAGS api/core/inc/*.h "$stage/include/fmodstudio"
+    cp $COPYFLAGS api/core/inc/*.hpp "$stage/include/fmodstudio"
 
     # Copy License (extracted from the readme)
     cp "doc/LICENSE.TXT" "$stage/LICENSES/fmodstudio.txt"
